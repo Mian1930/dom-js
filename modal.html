@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <button class="show-modal"> show modal 1</button>
+    <button class="show-modal"> show modal 2</button>
+    <button class="show-modal"> show modal 3</button>
+    <div class="modal hidden">
+    <button class="close-modal">&times;</button>
+    <h1> i am modal</h1>
+    <p > this is testing</p>
+    </div>
+    <div class="overlay hidden"></div>
+    <script>
+  const modal=document.querySelector('.modal')
+        const overlay=document.querySelector('.overlay')
+        const btnCloseModal=document.querySelector('.close-modal')
+        const btnOpenModal=document.querySelectorAll('.show-modal')
+      const openModal=function(){
+        console.log('button')
+            modal.classList.remove('hidden')
+            overlay.classList.remove('hidden')
+      }
+        const closeModal=function(){
+        modal.classList.add('hidden')
+        overlay.classList.add('hidden')
+       }
+        for(let i=0; i<btnOpenModal.length; i++)
+        btnOpenModal[i].addEventListener('click',openModal);
+        
+        btnCloseModal.addEventListener('click',closeModal)
+    overlay.addEventListener('click',closeModal)
+        // document.querySelector('.show-modal').style.color='red'
+
+        document.addEventListener('keydown',function(e){
+            console.log(e)
+            if(e.key==='Escape' && !modal.classList.contains('hidden')){
+                 closeModal()
+            }
+        })
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <header> 
+        <body>
+        <h1>guess number</h1>
+    <p class="between">Between 1 and 20</p>
+    <button class="btn again ">again</button>
+    <div class="number">?</div>
+    </header>
+    <input type="number" class="guess">
+    <button class="btn check"> Check</button>
+    <p class="msg"> start guessing </p>
+    <p class="label-score"> Score: <span class="score">20</span> </p>
+    <p class="label-highscore"> HighScore: <span class="highscore">0</span> </p>
+</head>
+    <script>
+// console.log(document.querySelector('.msg').textContent)
+// document.querySelector('.msg').textContent="correct"
+// document.querySelector('.guess').value=33
+// console.log(document.querySelector('.guess').value)
+const Secretnumber=Math.trunc(Math.random()*20)+1;
+let score=20
+let highscore=0
+document.querySelector('.number').textContent=Secretnumber
+document.querySelector('.check').addEventListener('click',function(){
+  const guess=Number(document.querySelector('.guess').value)
+console.log(guess)
+if(!guess){
+document.querySelector('.msg').textContent='no number'
+} else if(guess===Secretnumber){
+    document.querySelector('.msg').textContent="correct"  
+    document.querySelector('body').style.backgroundColor='red'
+    document.querySelector('.number').style.width='30rem'
+    if(score>highscore){
+     highscore=score
+     document.querySelector('.highscore').textContent=highscore
+    }
+} else if(guess>Secretnumber){
+    if(score>1){
+        document.querySelector('.msg').textContent='too high'
+        score--
+        document.querySelector('.score').textContent=score
+    } else {
+        document.querySelector('.msg').textContent='you lost'
+        document.querySelector('.score').textContent=0
+    }
+} else if(guess<Secretnumber){
+    if(score>1){
+        document.querySelector('.msg').textContent='too low'
+        score--
+        document.querySelector('.score').textContent=score
+    } else {
+        document.querySelector('.msg').textContent='you lost'
+        document.querySelector('.score').textContent=0
+    }
+}
+ 
+})
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="Enter any city" id="cityinput">
+        <button placeholder="submit" id="add">Submit</button>
+    </div>
+    <div>
+        <h2 id="cityoutput"></h2>
+        <p id="description"></p>
+        <p id="temp"></p>
+        <p id="wind"></p>
+    </div>
+    <script>
+  const inputval = document.querySelector('#cityinput')
+const btn = document.querySelector('#add');
+const city = document.querySelector('#cityoutput')
+const descrip = document.querySelector('#description')
+const temp = document.querySelector('#temp')
+const wind = document.querySelector('#wind')
+apik = "4b5bf94ca7064bde4e58f0f914454405"
+
+function convertion(val){
+    return (val - 273).toFixed(2)
+}
+    btn.addEventListener('click', function(){
+        fetch('https://api.openweathermap.org/data/2.5/weather?q='+inputval.value+'&appid='+apik)
+        .then(res => res.json())
+         //.then(data => console.log(data))
+        .then(data => {
+           const nameval = data['name']
+           const descrip = data['weather']['0']['description']
+           const tempature = data['main']['temp']
+           const wndspd = data['wind']['speed']
+
+            city.innerHTML=`Weather of <span>${nameval}<span>`
+            temp.innerHTML = `Temperature: <span>${ convertion(tempature)} C</span>`
+            description.innerHTML = `Sky Conditions: <span>${descrip}<span>`
+            wind.innerHTML = `Wind Speed: <span>${wndspd} km/h<span>`
+
+        })
+        .catch(err => alert('You entered Wrong city name'))
+    })
+
+    </script>
+</body>
+</html>
